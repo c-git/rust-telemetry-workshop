@@ -5,3 +5,4 @@ exercises/progress.db
 vendor/
 target/
 .cargo
+exercises/**/bacon.toml

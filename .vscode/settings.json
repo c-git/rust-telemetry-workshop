@@ -1,3 +1,6 @@
 {
-  "git.enableSmartCommit": true
+  "git.enableSmartCommit": true,
+  "cSpell.words": [
+    "maxdepth"
+  ]
 }

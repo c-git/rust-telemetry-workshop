@@ -5,6 +5,10 @@
 # You can also check bacon's own bacon.toml file
 #  as an example: https://github.com/Canop/bacon/blob/main/bacon.toml
 
+# This is not really able to be used from here so needs to be copied to each exercise
+# From inside of the exercise folder I executed the following command
+# find . -maxdepth 2 -type d -exec ln -s ../bacon.toml -r -t {} \;
+
 default_job = "clippy"
 
 [jobs.check]

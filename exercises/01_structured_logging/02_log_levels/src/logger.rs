@@ -52,7 +52,18 @@ impl log::Log for FilteredLogger {
         //
         // Check if we have a module-specific filter for this record, otherwise use the
         // default one.
-        todo!()
+        &metadata.level()
+            <= self
+                .module_filters
+                .iter()
+                .find_map(|(k, v)| {
+                    if k == metadata.target() {
+                        Some(v)
+                    } else {
+                        None
+                    }
+                })
+                .unwrap_or(&self.default_level_filter)
     }
 
     fn log(&self, record: &Record) {

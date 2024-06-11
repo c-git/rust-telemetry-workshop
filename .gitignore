@@ -6,3 +6,4 @@ vendor/
 target/
 .cargo
 exercises/**/bacon.toml
+api.txt

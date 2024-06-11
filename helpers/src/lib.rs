@@ -192,3 +192,13 @@ pub fn init_test_recorder() -> Snapshotter {
     recorder.install().unwrap();
     snapshotter
 }
+
+pub fn honeycomb_key() -> String {
+    let mut path = std::env::current_dir().expect("failed to get current directory");
+    assert!(path.pop(), "failed to get chapter folder");
+    assert!(path.pop(), "failed to get exercises folder");
+    assert!(path.pop(), "failed to get workshop root folder");
+    path = path.join("api.txt");
+    std::fs::read_to_string(&path)
+        .unwrap_or_else(|e| panic!("failed to get honeycomb key at path={path:?} {e}"))
+}

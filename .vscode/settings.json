@@ -1,6 +1,7 @@
 {
   "git.enableSmartCommit": true,
   "cSpell.words": [
-    "maxdepth"
+    "maxdepth",
+    "snapshotter"
   ]
 }

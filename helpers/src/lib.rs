@@ -51,6 +51,12 @@ impl MockWriter {
     }
 }
 
+impl Default for MockWriter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl std::io::Write for MockWriter {
     fn write(&mut self, buf: &[u8]) -> std::io::Result<usize> {
         self.buf()?.write(buf)

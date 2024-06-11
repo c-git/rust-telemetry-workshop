@@ -18,8 +18,7 @@ pub fn init_test_subscriber() {
 }
 
 pub fn init_tracer() -> Tracer {
-    let honeycomb_key =
-        std::env::var("HONEYCOMB_API_KEY").expect("`HONEYCOMB_API_KEY` must be set");
+    let honeycomb_key = helpers::honeycomb_key();
     let mut map = MetadataMap::with_capacity(1);
     map.insert("x-honeycomb-team", honeycomb_key.try_into().unwrap());
 

@@ -87,13 +87,12 @@ mod subscriber;
 
 pub use subscriber::init_test_subscriber;
 use tokio::task::yield_now;
-use tracing::{instrument, Span};
+use tracing::Span;
 
 /// # Exercise
 ///
 /// In the test below, attach a span to the invocations of `do_something` so that the output
 /// matches the expected one.
-#[instrument(fields(caller_id = tracing::field::Empty))]
 pub async fn do_something(id: u16) {
     // We give a chance to the runtime to pause this future
     // `.await` points is where the runtime gets back into the driver's seat
@@ -107,6 +106,7 @@ pub async fn do_something(id: u16) {
 mod tests {
     use super::init_test_subscriber;
     use crate::do_something;
+    use tracing::Instrument;
 
     #[tokio::test]
     /// We spawn a bunch of futures and check that we don't have any cross-task interference
@@ -121,8 +121,7 @@ mod tests {
         for i in 0..n_futures {
             let future = do_something(i);
             let span = tracing::info_span!("Task", caller_id = tracing::field::Empty);
-            // TODO: attach the span to the future!
-            join_set.spawn(future);
+            join_set.spawn(future.instrument(span));
         }
         // Let's wait for all tasks to complete.
         while let Some(_) = join_set.join_next().await {}

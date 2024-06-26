@@ -87,12 +87,13 @@ mod subscriber;
 
 pub use subscriber::init_test_subscriber;
 use tokio::task::yield_now;
-use tracing::Span;
+use tracing::{instrument, Span};
 
 /// # Exercise
 ///
 /// In the test below, attach a span to the invocations of `do_something` so that the output
 /// matches the expected one.
+#[instrument(fields(caller_id = tracing::field::Empty))]
 pub async fn do_something(id: u16) {
     // We give a chance to the runtime to pause this future
     // `.await` points is where the runtime gets back into the driver's seat

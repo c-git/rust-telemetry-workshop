@@ -28,7 +28,7 @@
 mod tests {
     #[test]
     fn starting_block() {
-        let msg = format!("I'm ready to go!");
+        let msg = "I'm ready to go!".to_string();
         assert_eq!(msg, "I'm ready to go!")
     }
 }

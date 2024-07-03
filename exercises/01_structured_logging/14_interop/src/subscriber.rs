@@ -11,6 +11,7 @@ pub fn init_test_subscriber() -> MockWriter {
         .init();
 
     // TODO: redirect `log` events to `tracing`!
+    tracing_log::LogTracer::init().unwrap();
 
     writer2
 }
